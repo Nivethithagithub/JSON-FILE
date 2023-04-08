@@ -1,0 +1,59 @@
+#Create a class named ‘Dog’.
+
+import json
+
+class Dog:
+    def __init__(self, name, age, coat_color):
+        self.name = name
+        self.age = age
+        self.coat_color = coat_color
+
+    def description(self):
+        print(f"{self.name} is {self.age} years old.")
+
+    def get_info(self):
+        print(f"{self.name}'s coat color is {self.coat_color}.")
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
+
+
+class JackRussellTerrier(Dog):
+    def __init__(self, name, age, coat_color):
+        super().__init__(name, age, coat_color)
+
+    def hunt(self):
+        print(f"{self.name} is hunting.")
+
+    def do_tricks(self):
+        print(f"{self.name} is doing tricks.")
+
+    def to_json(self):
+        return json.dumps({"type": "JackRussellTerrier", **self.__dict__})
+
+
+class Bulldog(Dog):
+    def __init__(self, name, age, coat_color):
+        super().__init__(name, age, coat_color)
+
+    def guard(self):
+        print(f"{self.name} is guarding the house.")
+
+    def drool(self):
+        print(f"{self.name} is drooling.")
+
+    def to_json(self):
+        return json.dumps({"type": "Bulldog", **self.__dict__})
+dog1 = JackRussellTerrier("Buddy", 3, "white and brown")
+dog1.description()
+dog1.get_info()
+dog1.hunt()
+dog1.do_tricks()
+print(dog1.to_json())
+
+dog2 = Bulldog("Max", 5, "black")
+dog2.description()
+dog2.get_info()
+dog2.guard()
+dog2.drool()
+print(dog2.to_json())
